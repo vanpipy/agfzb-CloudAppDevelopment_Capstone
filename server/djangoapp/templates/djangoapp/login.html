@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+    <body>
+    <!--Add a login form here -->
+    <form action="{% url 'djangoapp:login' %}" method="post">
+        {% csrf_token %}
+        <div class=""> <!--Stylize root div with .container class -->
+          <h1>Login</h1>
+          <div class=""> <!--Stylize second div with .form-group class -->
+            <label for="username"><b>User Name: </b></label>
+            <input id="username" class="" type="text" placeholder="Enter User Name: " name="username" required> <!--Stylize input with .form-control class -->
+            <label for="password"><b>Password: </b></label>
+            <input id="psw" type="password" class="" placeholder="Enter Password: " name="password" required> <!--Stylize input with .form-control class -->
+          </div>
+          {% if message %}
+            <div class=""> <!--Stylize the message paragraph with .alert and .alert-warning class -->
+              {{ message }}
+            </div>
+          {% endif %}
+          <button class="" type="submit">Login</button> <!--Stylize button with .btn and .btn-primary class -->
+        </div>
+      </form>
+    </body>
+</html>

@@ -18,9 +18,27 @@
      This is the index page of your Django app!
     <!--Add a nav bar here -->
     <nav>
-        <a href="{% url 'djangoapp:about' %}">About</a>
-        <a href="{% url 'djangoapp:contact' %}">About</a>
+        
     </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'djangoapp:about' %}">About</a>
+        <a class="navbar-brand" href="{% url 'djangoapp:contact' %}">Contact</a>
+      
+        <div class="collapse navbar-collapse">
+          {% if user.is_authenticated %}
+            <form class="form-inline my-2 my-lg-0" id="logout">
+                <span>{{ user.username }}</span>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+          {% else %}
+            <form class="form-inline my-2 my-lg-0" id="login">
+                <input class="form-control mr-sm-2" style="width: 120px" type="text" placeholder="username" aria-label="username">
+                <input class="form-control mr-sm-2" style="width: 120px" type="password" placeholder="password" aria-label="password">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            </form>
+          {% endif %}
+        </div>
+      </nav>
     <!--Add a dealer table here -->
 
     </body>
