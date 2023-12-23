@@ -1,16 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<!-- templates/djangoapp/add_review.html -->
 
-</head>
-    <body>
-    <!--Add review form here -->
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Add Review to {{ dealership_name }}</h1>
+  <form method="post" action="{% url 'djangoapp:add_review' dealer_id %}">
+    {% csrf_token %}
+    
+    <label class="row" for="review"><strong>Review Content:</strong></label>
+    <textarea class="row form-control" id="review" name="review" rows="2" required></textarea>
+
+    <div class="row form-check">
+      <input class="form-check-input" type="checkbox" name="purchase" id="purchase">
+      <label class="form-check-label" for="purchase"><strong>Did you purchase a car from this dealer?</strong></label>
+    </div>
+    <div class="row">
+        <label for="car_model"><strong>Select a Car:</strong></label>
+        <select name="car_model" id="car_model" class="form-select" required>
+        {% for car in cars %}
+            <option value="{{ car.id }}">{{ car.name }} - {{ car.car_make }} - {{ car.year|date:"Y" }}</option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <label class="row" for="purchase_date"><strong>Purchase Date:</strong></label>
+    <input class="date-own row form-control" type="text" name="purchase_date" id="purchase_date">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.date-own').datepicker({
+          format: 'mm/dd/yyyy'
+        });
+      });
+    </script>
+
+    <button type="submit" class="row btn btn-primary m-4">Submit Review</button>
+  </form>
+{% endblock %}

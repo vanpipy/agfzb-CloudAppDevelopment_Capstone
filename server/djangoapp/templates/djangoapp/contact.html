@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-    <body>
-    <h1>Contact Us</h1>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<h1>
+Contact Us:
+</h1>
+<ol>
+<li><b>Phone: </b>+1 555 848 511</li>
+<li><b>Email: </b>dealershipreview@company.com</li>
+</ol>
+{% endblock %}
